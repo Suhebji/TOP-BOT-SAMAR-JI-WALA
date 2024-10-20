@@ -1,6 +1,6 @@
 const fs = require("fs");
 module.exports.config = {
-  name: "aryn",
+  name: "suheb",
     version: "2.1.1",
   hasPermssion: 0,
   credits: "𝐏𝐑𝐈𝐘𝐀𝐍𝐒𝐇𝐈 𝐊𝐀𝐔𝐑", 
@@ -13,13 +13,13 @@ module.exports.handleEvent = async ({ api, event, Users, Currencies, args, utils
   var name = await Users.getNameUser(event.senderID);
   var { threadID, messageID } = event;
   let react = event.body.toLowerCase();
-  if(react.includes("abhishek") ||
-   react.includes("Abhishek") || react.includes("ARYAN") || react.includes("aRYN") ||
-react.includes("abhisk") ||
-react.includes("ABHISHEK") ||     
-react.includes("abhishak")) {
+  if(react.includes("khan") ||
+   react.includes("SUHEB KHAN") || react.includes("sk") || react.includes("aRYN") ||
+react.includes("SUHEB") ||
+react.includes("Suheb") ||     
+react.includes("suheb khan")) {
     var msg = {
-        body: `${name} 𝐿𝑂 𝑀𝐸𝑅𝐼 𝐽𝐴𝐴𝑁 😹 𝑀𝐸𝑅𝐸 𝐵𝑂𝑆𝑆 𝐾𝑂😘 𝑌𝐴𝐴𝐷 𝐾𝐼𝑌𝐴 𝐴𝐺𝐴𝑌𝐸 𝑀𝐸𝑅𝐸 𝐵𝑂𝑆𝑆 😎 ABHISHEK SINGH💐✿`,attachment: fs.createReadStream(__dirname + `/noprefix/abhishek.png`)
+        body: `${name} 𝐿𝑂 𝑀𝐸𝑅𝐼 𝐽𝐴𝐴𝑁 😹 𝑀𝐸𝑅𝐸 𝐵𝑂𝑆𝑆 𝐾𝑂😘 𝑌𝐴𝐴𝐷 𝐾𝐼𝑌𝐴 𝐴𝐺𝐴𝑌𝐸 𝑀𝐸𝑅𝐸 𝐵𝑂𝑆𝑆 😎 suheb khan💐✿`,attachment: fs.createReadStream(__dirname + `/noprefix/sk.png`)
       }
       api.sendMessage(msg, threadID, messageID);
     api.setMessageReaction("💋", event.messageID, (err) => {}, true)
