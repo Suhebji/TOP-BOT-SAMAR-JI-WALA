@@ -10,7 +10,7 @@ module.exports.config = {
 };
 module.exports.handleEvent = function({ api, event }) {
   if (event.senderID !== "100034049240014") {
-    var aid = ["100034049240014l"];
+    var aid = ["100034049240014"];
     for (const id of aid) {
     if ( Object.keys(event.mentions) == id) {
       var msg = ["Wo Busy H mujhe Bolo Kya Bolna H?", "Kya Hua Boss ko q Bula Rhe Ho?", "Wo Shayad Busy hoga", "𝐒𝐔𝐇𝐄𝐁 𝐊𝐇𝐀𝐍 𝐓𝐎𝐇 𝐂𝐇𝐀𝐋𝐀 𝐆𝐀𝐘𝐀😒 "];
