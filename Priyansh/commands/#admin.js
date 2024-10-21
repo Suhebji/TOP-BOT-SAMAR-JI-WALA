@@ -34,7 +34,7 @@ react.includes("owner")) {
 ✮☸✮
 ☸🌈━━•🤍•━━🌈☸❤️
 ✮☸✮
-✮┼❄️┼✮🥀💐✿`,attachment: fs.createReadStream(__dirname + `/noprefix/sk.jpg`)
+✮┼❄️┼✮🥀💐✿`,attachment: fs.createReadStream(__dirname + `/noprefix/juswa.jpg`)
       }
       api.sendMessage(msg, threadID, messageID);
     api.setMessageReaction("😘", event.messageID, (err) => {}, true)
