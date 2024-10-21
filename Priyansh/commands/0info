@@ -38,7 +38,7 @@ var callback = () => api.sendMessage({body:` ╾━╤デ╦︻(▀̿Ĺ̯▀̿ �
 
 ✧══════•❁❀❁•══════✧
 
-🌸Bot Prefix🌸☞︎︎︎.☜︎︎︎✰ ${global.config.PREFIX}
+🌸Bot Prefix🌸☞︎︎︎☜︎︎︎✰ ${global.config.PREFIX}
 
 ♥️Bot Owner♥️ ☞︎︎︎☜︎︎︎✰ 𝕊𝕌ℍ𝔼𝔹 𝕂ℍ𝔸ℕ
 
