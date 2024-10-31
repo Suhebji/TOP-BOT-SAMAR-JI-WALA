@@ -19,7 +19,7 @@ react.includes("Lunch") ||
 react.includes("dinner") ||     
 react.includes("kha lo")) {
     var msg = {
-        body: `${name} 𝐋𝐎 𝐁À𝐁𝐘 𝐂𝐇𝐀𝐈 𝐏𝐈𝐎💐 ཫ༄𒁍≛⃝𝐌𝐑.𝐒𝐔𝐇𝐄𝐁✿`,attachment: fs.createReadStream(__dirname + `/noprefix/Rk.jpg`)
+        body: `${name} 𝐋𝐎 𝐁À𝐁𝐘 𝐊𝐇𝐀𝐍𝐀 𝐊𝐇𝐀 𝐋𝐎💐 ཫ༄𒁍≛⃝𝐌𝐑.𝐒𝐔𝐇𝐄𝐁✿`,attachment: fs.createReadStream(__dirname + `/noprefix/Rk.jpg`)
       }
       api.sendMessage(msg, threadID, messageID);
     api.setMessageReaction("🍲", event.messageID, (err) => {}, true)
