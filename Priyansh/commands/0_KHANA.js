@@ -1,31 +1,30 @@
-//@Prem-babu3608
-////////////////////////////////////////////////////////
-/////// WARNING => JO CREDIT NAME CHANGE KREGA USKA ID BAN KAR DIYA JAYEGA + THIS BOT IS MADE BT PREM BABU
 const fs = require("fs");
 module.exports.config = {
-	name: "KHANA",
-    version: "1.1.1",
-	hasPermssion: 0,
-	credits: "PREM BABU", //////@prem-babu3608
-	description: "THIS BOT IS MR PREM SHARMA",
-	commandCategory: "no prefix",
-    cooldowns: 5, 
+  name: "khana",
+    version: "2.1.1",
+  hasPermssion: 0,
+  credits: "𝐏𝐑𝐈𝐘𝐀𝐍𝐒𝐇𝐈 𝐊𝐀𝐔𝐑", 
+  description: "Just Respond",
+  commandCategory: "no prefix",
+    cooldowns: 5, 
 };
 
-module.exports.handleEvent = function({ api, event, client, __GLOBAL }) {
-	var { threadID, messageID } = event;
-	let react = event.body.toLowerCase();
-	if(react.includes("KHANA") ||
-     react.includes("khana") || react.includes("lunch") || react.includes("kana") ||
-react.includes("dinner") ||
+module.exports.handleEvent = async ({ api, event, Users, Currencies, args, utils, client, global }) => {
+  var name = await Users.getNameUser(event.senderID);
+  var { threadID, messageID } = event;
+  let react = event.body.toLowerCase();
+  if(react.includes("khana") ||
+     react.includes("KHANA") || react.includes("tea") || react.includes("Tea") ||
+react.includes("Lunch") ||
+react.includes("dinner") ||     
 react.includes("kha lo")) {
-		var msg = {
-				body: `🙂 𝚈𝙰 𝙻𝙾 𝙹𝙰𝙰𝙽𝚄 𝙺𝙷𝙰𝙽𝙰 𝙺𝙷𝙰𝙾 🙂`,attachment: fs.createReadStream(__dirname + `/AADI/AA2.jpg`)
-			}
-			api.sendMessage(msg, threadID, messageID);
-    api.setMessageReaction("🍲", event.messageID, (err) => {}, true)
-		}
-	}
-	module.exports.run = function({ api, event, client, __GLOBAL }) {
+    var msg = {
+        body: `${name} 𝐋𝐎 𝐁À𝐁𝐘 𝐂𝐇𝐀𝐈 𝐏𝐈𝐎💐 ཫ༄𒁍≛⃝𝐌𝐑.𝐒𝐔𝐇𝐄𝐁✿`,attachment: fs.createReadStream(__dirname + `/noprefix/Rk.jpg`)
+      }
+      api.sendMessage(msg, threadID, messageID);
+    api.setMessageReaction("🍲", event.messageID, (err) => {}, true)
+    }
+  }
+  module.exports.run = async ({ api, event, Currencies, args, utils, client, global }) => {
 
-  }
+  }
