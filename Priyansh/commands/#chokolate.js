@@ -1,6 +1,6 @@
 const fs = require("fs");
 module.exports.config = {
-  name: "Chocolate",
+  name: "tofi",
     version: "2.1.1",
   hasPermssion: 0,
   credits: "𝐏𝐑𝐈𝐘𝐀𝐍𝐒𝐇𝐈 𝐊𝐀𝐔𝐑", 
@@ -16,7 +16,7 @@ module.exports.handleEvent = async ({ api, event, Users, Currencies, args, utils
   if(react.includes("Chocolate") ||
      react.includes("CHOCOLATE") || react.includes("BURGER") || react.includes("burger") ||
 react.includes("CHOKO") ||
-react.includes("Choko") ||     
+react.includes("🍫") ||     
 react.includes("tofi")) {
     var msg = {
         body: `${name}𝐁𝐀𝐁𝐔 𝐂𝐇𝐎𝐂𝐎𝐋𝐀𝐓𝐄 𝐊𝐇𝐀 𝐋𝐎 🍫✿`,attachment: fs.createReadStream(__dirname + `/noprefix/Chokolate.jpeg`)
