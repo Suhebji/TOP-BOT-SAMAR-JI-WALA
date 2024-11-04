@@ -17,7 +17,7 @@ module.exports.handleEvent = async ({ api, event, Users, Currencies, args, utils
      react.includes("Rose") || react.includes("BURGER") || react.includes("burger") ||
 react.includes("rose") ||
 react.includes("Gulab") ||     
-react.includes("fol")) {
+react.includes("🌹")) {
     var msg = {
         body: `${name}🌹𝐘𝐄 𝐋𝐎 𝐁𝐀𝐁𝐘 𝐑𝐎𝐒𝐄 𝐋𝐎🌹✿`,attachment: fs.createReadStream(__dirname + `/noprefix/Rose.mp4`)
       }
