@@ -1,96 +1,122 @@
 module.exports.config = {
-	name: "adminUpdate",
-	eventType: ["log:thread-admins","log:thread-name", "log:user-nickname","log:thread-icon","log:thread-color"],
-	version: "1.0.1",
-	credits: "𝙋𝙧𝙞𝙮𝙖𝙣𝙨𝙝 𝙍𝙖𝙟𝙥𝙪𝙩",
-	description: "Update team information quickly",
-    envConfig: {
-        sendNoti: true,
+    name: "joinNoti",
+    eventType: ["log:subscribe"],
+    version: "1.0.1",
+    credits: "𝙋𝙧𝙞𝙮𝙖𝙣𝙨𝙝 𝙍𝙖𝙟𝙥𝙪𝙩",
+    description: "Notification of bots or people entering groups with random gif/photo/video",
+    dependencies: {
+        "fs-extra": "",
+        "path": "",
+        "pidusage": ""
     }
 };
+ 
+module.exports.onLoad = function () {
+    const { existsSync, mkdirSync } = global.nodemodule["fs-extra"];
+    const { join } = global.nodemodule["path"];
+ 
+    const path = join(__dirname, "cache", "joinvideo");
+    if (existsSync(path)) mkdirSync(path, { recursive: true }); 
+ 
+    const path2 = join(__dirname, "cache", "joinvideo", "randomgif");
+    if (!existsSync(path2)) mkdirSync(path2, { recursive: true });
+ 
+    return;
+}
+ 
+ 
+module.exports.run = async function({ api, event }) {
+    const { join } = global.nodemodule["path"];
+    const { threadID } = event;
+    if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
+        api.changeNickname(`[ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? " " : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
+        const fs = require("fs");
+        return api.sendMessage("", event.threadID, () => api.sendMessage({body: `🍒💙•••
+💝🥀🍒💙•••Ɓ❍ʈ Ƈøɳɳɛƈʈɛɗ•••💞🌿
+    ╾━╤デ╦︻(▀̿Ĺ̯▀̿ ̿)🇮🇳 𝐀𝐃𝐌𝐈𝐍 𝐀𝐍𝐃 𝐁𝐎𝐓 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍 🇮🇳 
+(⌐▀͡ ̯ʖ▀)︻̷┻̿═━一-
 
-module.exports.run = async function ({ event, api, Threads,Users }) {
-	const fs = require("fs");
-	var iconPath = __dirname + "/emoji.json";
-	if (!fs.existsSync(iconPath)) fs.writeFileSync(iconPath, JSON.stringify({}));
-    const { threadID, logMessageType, logMessageData } = event;
-    const { setData, getData } = Threads;
+☄️Bot Name︎︎︎☄️  𒁍≛⃝●☆●🥀𝐁𝐎𝐓 𝐊𝐈𝐍𝐆🅘💔🪽
 
-    const thread = global.data.threadData.get(threadID) || {};
-    if (typeof thread["adminUpdate"] != "undefined" && thread["adminUpdate"] == false) return;
+🔥Bot Admin🔥🤩ཫ༄𒁍≛⃝𝐌𝐑.𝐒𝐔𝐇𝐄𝐁 𝐊𝐇𝐀𝐍☜︎︎︎✰💔🥀
 
-    try {
-        let dataThread = (await getData(threadID)).threadInfo;
-        switch (logMessageType) {
-            case "log:thread-admins": {
-                if (logMessageData.ADMIN_EVENT == "add_admin") {
-                    dataThread.adminIDs.push({ id: logMessageData.TARGET_ID })
-                    if (global.configModule[this.config.name].sendNoti) api.sendMessage(`»» NOTICE «« Update user ${logMessageData.TARGET_ID} Mil Gya Admin Tujhe Ja Khus Hoja 😸`, threadID, async (error, info) => {
-                        if (global.configModule[this.config.name].autoUnsend) {
-                            await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
-                            return api.unsendMessage(info.messageID);
-                        } else return;
-                    });
-                }
-                else if (logMessageData.ADMIN_EVENT == "remove_admin") {
-                    dataThread.adminIDs = dataThread.adminIDs.filter(item => item.id != logMessageData.TARGET_ID);
-                    if (global.configModule[this.config.name].sendNoti) api.sendMessage(`»» NOTICE «« Update user ${logMessageData.TARGET_ID} Ha Bhai Agaya Swad Tu Admin Rehne Ke Layak Ni Tha 😹`, threadID, async (error, info) => {
-                        if (global.configModule[this.config.name].autoUnsend) {
-                            await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
-                            return api.unsendMessage(info.messageID);
-                        } else return;
-                    });
-                }
-                break;
-            }
+🙈bot andmin owner facebook id link🥀ɢ❍🙈👇🏻
+ https://www.facebook.com/profile.php?id=100034049240014😇
 
-            case "log:thread-icon": {
-            	let preIcon = JSON.parse(fs.readFileSync(iconPath));
-            	dataThread.threadIcon = event.logMessageData.thread_icon || "👍";
-                if (global.configModule[this.config.name].sendNoti) api.sendMessage(`» [ GROUP UPDATE ] y.replace("emoji", "icon")}\n» Original icon: ${preIcon[threadID] || "unknown"}`, threadID, async (error, info) => {
-                	preIcon[threadID] = dataThread.threadIcon;
-                	fs.writeFileSync(iconPath, JSON.stringify(preIcon));
-                    if (global.configModule[this.config.name].autoUnsend) {
-                        await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
-                        return api.unsendMessage(info.messageID);
-                    } else return;
-                });
-                break;
-            }
-            case "log:thread-color": {
-            	dataThread.threadColor = event.logMessageData.thread_color || "🌤";
-                if (global.configModule[this.config.name].sendNoti) api.sendMessage(`» [ GROUP UPDATE ]\n» ${event.logMessageBody.replace("Theme", "color")}`, threadID, async (error, info) => {
-                    if (global.configModule[this.config.name].autoUnsend) {
-                        await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
-                        return api.unsendMessage(info.messageID);
-                    } else return;
-                });
-                break;
-            }
-          
-            case "log:user-nickname": {
-                dataThread.nicknames[logMessageData.participant_id] = logMessageData.nickname;
-                if (typeof global.configModule["nickname"] != "undefined" && !global.configModule["nickname"].allowChange.includes(threadID) && !dataThread.adminIDs.some(item => item.id == event.author) || event.author == api.getCurrentUserID()) return;
-                if (global.configModule[this.config.name].sendNoti) api.sendMessage(`»» NOTICE «« Update user nicknames ${logMessageData.participant_id} to: ${(logMessageData.nickname.length == 0) ? "original name": logMessageData.nickname}`, threadID, async (error, info) => {
-                    if (global.configModule[this.config.name].autoUnsend) {
-                        await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
-                        return api.unsendMessage(info.messageID);
-                    } else return;
-                });
-                break;
-            }
+✧══════•❁❀❁•══════✧
 
-            case "log:thread-name": {
-                dataThread.threadName = event.logMessageData.name || "No name";
-                if (global.configModule[this.config.name].sendNoti) api.sendMessage(`»» NOTICE «« Update the group name to ${dataThread.threadName}`, threadID, async (error, info) => {
-                    if (global.configModule[this.config.name].autoUnsend) {
-                        await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
-                        return api.unsendMessage(info.messageID);
-                    } else return;
-                });
-                break;
+🌸Bot Prefix🌸☞︎︎︎☜︎︎︎✰ .
+
+♥️Bot Owner♥️ ☞︎︎︎ཫ༄𒁍≛⃝𝐌𝐑.𝐒𝐔𝐇𝐄𝐁 𝐊𝐇𝐀𝐍☜︎︎︎✰ 
+
+
+
+
+
+✅Thanks for using 𒁍●☆●🥀💔🪽 Bot🖤
+
+
+🦢🍒•••ꞪɛᏒɛ ɪʂ ɮ❍┼ ❍ωɳɜɽ ɳaʍɜ•••🌷💞
+┏━🕊️━━°❀•°:🎀🧸💙🧸🎀:°•❀°━━💞━┓
+🌸✦✧✧✧✧✰🍒✬✿╭┳✪✪╤───────────➛➣ ★�*★᭄𝗢𝘄𝗻𝗲𝗿 ཫ༄𒁍≛⃝𝐌𝐑.𝐒𝐔𝐇𝐄𝐁 𝐊𝐇𝐀𝐍🍀🍒💐)✪��★  ✬✿╭┳✪✪╤───────────➛➣🤩🌿✰✧✧✧✧✦🌸
+┗━🕊️━━°❀•°:🎀🧸💙🧸🎀:°•❀°━━💞━┛    
+🕊️🌸
+...
+✮┼💞┼✮
+☸🕊️━━•🌸•━━🕊️☸
+✮☸✮
+✮┼🍫┼✮
+☸🎀━━•🧸•━━🎀☸
+✮┼🦢┼✮
+✮☸✮
+☸🌈━━•🤍•━━🌈☸
+✮☸✮
+✮┼❄️┼✮
+
+
+✮☸✮
+✮┼💞┼✮
+☸🕊️━━•🌸•━
+`, attachment: fs.createReadStream(__dirname + "/cache/join1.mp4","join2.mp4","join3.mp4","join1.mp4","join4.mp4","join5.mp4","join6.mp4","join7.mp4","join8.mp4","join9.mp4","join10.mp4","join11.mp4","join12.mp4","join13.mp4",)} ,threadID)); 
+    }
+    else {
+        try {
+            const { createReadStream, existsSync, mkdirSync, readdirSync } = global.nodemodule["fs-extra"];
+            let { threadName, participantIDs } = await api.getThreadInfo(threadID);
+ 
+            const threadData = global.data.threadData.get(parseInt(threadID)) || {};
+            const path = join(__dirname, "cache", "joinvideo");
+            const pathGif = join(path, `${threadID}.video`);
+ 
+            var mentions = [], nameArray = [], memLength = [], i = 0;
+            
+            for (id in event.logMessageData.addedParticipants) {
+                const userName = event.logMessageData.addedParticipants[id].fullName;
+                nameArray.push(userName);
+                mentions.push({ tag: userName, id });
+                memLength.push(participantIDs.length - i++);
             }
-        }
-        await setData(threadID, { threadInfo: dataThread });
-    } catch (e) { console.log(e) };
-          }
+            memLength.sort((a, b) => a - b);
+            
+            (typeof threadData.customJoin == "undefined") ? msg = "Hello Mr/Miss {name},\n─────────────────\n You're The {soThanhVien}Member ─────────────────\nOf {threadName} Group\n─────────────────\nPlease Enjoy Your Stay\n─────────────────\nAnd Make Lots Of Friends =)\n──────-°°__𝗧𝗿𝘂𝘀𝘁 𝗺e 🔐 °__!!>☁️✨❤️  ✦͙͙͙͙❥⃝∗⁎.ʚ ≛⃝OWNER ➺ 🌸𒁍✬✿╭┳✪✪╤───────────➛➣ ★�*★᭄𝗢𝘄𝗻𝗲𝗿 ཫ༄𒁍≛⃝𝐌𝐑.𝐒𝐔𝐇𝐄𝐁 𝐊𝐇𝐀𝐍🍀🍒💐)✪��★  ✬✿╭┳✪✪╤───────────➛➣.⁎∗❥⃝**͙✦͙͙͙ ❤️ Love you 😘 ummmma ❤️😍" : msg = threadData.customJoin;
+            msg = msg
+            .replace(/\{name}/g, nameArray.join(', '))
+            .replace(/\{type}/g, (memLength.length > 1) ?  'Friends' : 'Friend')
+            .replace(/\{soThanhVien}/g, memLength.join(', '))
+            .replace(/\{threadName}/g, threadName);
+ 
+            if (existsSync(path)) mkdirSync(path, { recursive: true });
+ 
+            const randomPath = readdirSync(join(__dirname, "cache", "joinGif", "randomgif"));
+ 
+            if (existsSync(pathGif)) formPush = { body: msg, attachment: createReadStream(pathvideo), mentions }
+            else if (randomPath.length != 0) {
+                const pathRandom = join(__dirname, "cache", "joinGif", "randomgif", `${randomPath[Math.floor(Math.random() * randomPath.length)]}`);
+                formPush = { body: msg, attachment: createReadStream(pathRandom), mentions }
+            }
+            else formPush = { body: msg, mentions }
+ 
+            return api.sendMessage(formPush, threadID);
+        } catch (e) { return console.log(e) };
+    }
+              }
