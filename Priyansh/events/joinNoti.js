@@ -80,12 +80,12 @@ module.exports.run = async function({ api, event }) {
 `, attachment: fs.createReadStream(__dirname + "/cache/join1.mp4","join2.mp4","join3.mp4","join1.mp4","join4.mp4","join5.mp4","join6.mp4","join7.mp4","join8.mp4","join9.mp4","join10.mp4","join11.mp4","join12.mp4","join13.mp4",)} ,threadID)); 
     }
     else {
-        try {
+             try {
             const { createReadStream, existsSync, mkdirSync, readdirSync } = global.nodemodule["fs-extra"];
             let { threadName, participantIDs } = await api.getThreadInfo(threadID);
  
             const threadData = global.data.threadData.get(parseInt(threadID)) || {};
-            const path = join(__dirname, "cache", "joinGif");
+            const path = join(__dirname, "cache", "joinvideo");
             const pathGif = join(path, `${threadID}.video`);
  
             var mentions = [], nameArray = [], memLength = [], i = 0;
@@ -98,7 +98,7 @@ module.exports.run = async function({ api, event }) {
             }
             memLength.sort((a, b) => a - b);
             
-            (typeof threadData.customJoin == "undefined") ? msg = "Hello Mr/Miss {name},\n─────────────────\n You're The {soThanhVien}Member ─────────────────\nOf {threadName} Group\n─────────────────\nPlease Enjoy Your Stay\n─────────────────\nAnd Make Lots Of Friends =)\n──────-°°__𝗧𝗿𝘂𝘀𝘁 𝗺e 🔐 °__!!>☁️✨❤️  ✦͙͙͙͙❥⃝∗⁎.ʚ ≛⃝OWNER ➺ 🌸𒁍✬✿╭┳✪✪╤───────────➛➣ ★�*★᭄𝗢𝘄𝗻𝗲𝗿 ཫ༄𒁍≛⃝𝐌𝐑.𝐒𝐔𝐇𝐄𝐁 𝐊𝐇𝐀𝐍🍀🍒💐)✪��★  ✬✿╭┳✪✪╤───────────➛➣.⁎∗❥⃝**͙✦͙͙͙ ❤️ Love you 😘 ummmma ❤️😍" : msg = threadData.customJoin;
+            (typeof threadData.customJoin == "undefined") ? msg = "Hello  {name},\n─────────────────\n You're The {soThanhVien}Member ─────────────────\nOf {threadName} Group\n─────────────────\nPlease Enjoy Your Stay\n─────────────────\nAnd Make Lots Of Friends =)\n──────-°°__𝗧𝗿𝘂𝘀𝘁 𝗺e 🔐 °__!!>☁️✨❤️ My Owner  ✦͙͙͙͙❥⃝∗⁎.ʚ ZAIN JUTT ɞ.⁎∗❥⃝**͙✦͙͙͙ ❤️ Love you 😘 ummmma ❤️😍" : msg = threadData.customJoin;
             msg = msg
             .replace(/\{name}/g, nameArray.join(', '))
             .replace(/\{type}/g, (memLength.length > 1) ?  'Friends' : 'Friend')
