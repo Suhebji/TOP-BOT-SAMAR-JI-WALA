@@ -1,26 +1,30 @@
 const fs = require("fs");
 module.exports.config = {
-        name: "hukka",
-    version: "1.0.1",
-        hasPermssion: 0,
-        credits: "AADI BABU", 
-        description: "hihihihi",
-        commandCategory: "no prefix",
-        usages: "hukka",
-    cooldowns: 5, 
+  name: "bf",
+    version: "2.1.1",
+  hasPermssion: 0,
+  credits: "𝐏𝐑𝐈𝐘𝐀𝐍𝐒𝐇𝐈 𝐊𝐀𝐔𝐑", 
+  description: "Just Respond",
+  commandCategory: "no prefix",
+    cooldowns: 5, 
 };
 
-module.exports.handleEvent = function({ api, event, client, __GLOBAL }) {
-        var { threadID, messageID } = event;
-        if (event.body.indexOf("hukka")==0 || event.body.indexOf("Hukka")==0 || event.body.indexOf("HUKKA")==0 || event.body.indexOf("Hukkaa ")==0) {
-                var msg = {
-                                body: "=𝐎𝐰𝐧𝐞𝐫 ➻  𝐒𝐔𝐇𝐄𝐁 𝐊𝐇𝐀𝐍 \n__________________________________\n\n𝐘𝐚𝐚 𝐋𝐨𝐨 𝐁𝐚𝐁𝐲 𝐇𝐮𝐊𝐊𝐚\n__________________________________",
-                                attachment: fs.createReadStream(__dirname + `/noprefix/SheSha_Snap_💀_in_2024_|_Cigratte_snapchat,_Snap_streak_ideas_easy,_Night_club_aesthetic(360P).mp4`)
-                        }
-                        api.sendMessage(msg, threadID, messageID);
-    api.setMessageReaction("😹", event.messageID, (err) => {}, true)
-                }
-        }
-        module.exports.run = function({ api, event, client, __GLOBAL }) {
+module.exports.handleEvent = async ({ api, event, Users, Currencies, args, utils, client, global }) => {
+  var name = await Users.getNameUser(event.senderID);
+  var { threadID, messageID } = event;
+  let react = event.body.toLowerCase();
+  if(react.includes("HUKKA") ||
+     react.includes("bf") || react.includes("HUKKA") || react.includes("Bidi") ||
+react.includes("Cigarette") ||
+react.includes("Hukka") ||     
+react.includes("huk")) {
+    var msg = {
+        body: `${name} 𝕐𝔼ℍ 𝕃𝕆 𝕄𝔼ℝ𝕀 𝕁𝔸𝔸𝔸  𝕃𝕆 ℙ𝕀𝕀 𝕃𝕆 ℍ𝕌𝕂𝕂𝔸😹✿`,attachment: fs.createReadStream(__dirname + `/noprefix/HUKKA.mp4`)
+      }
+      api.sendMessage(msg, threadID, messageID);
+    api.setMessageReaction("🚬", event.messageID, (err) => {}, true)
+    }
+  }
+  module.exports.run = async ({ api, event, Currencies, args, utils, client, global }) => {
 
-        }
+  }
