@@ -19,7 +19,7 @@ react.includes("rudra Rani ka raja ❤️🌹🤍💚❤️❤️🌹❤️🤍�
 react.includes("KABIR") ||     
 react.includes("KABIR SHAKH")) {
     var msg = {
-        body: `${name}𝐊𝐈𝐘𝐀 𝐊𝐀𝐀𝐌 𝐇𝐀𝐈 𝐀𝐏𝐊𝐎 𝐑𝐔𝐃𝐑𝐀𝐊𝐒𝐇𝐈 𝐓𝐈𝐖𝐀𝐑𝐈  𝐊𝐈 𝐉𝐀𝐀𝐍 𝐊𝐀𝐁𝐈𝐑 𝐒𝐇𝐀𝐈𝐊𝐇  𝐒𝐄💐✿`,attachment: fs.createReadStream(__dirname + `/noprefix/kabhir.png`)
+        body: `${name}𝐊𝐈𝐘𝐀 𝐊𝐀𝐀𝐌 𝐇𝐀𝐈 𝐀𝐏𝐊𝐎 𝐑𝐔𝐃𝐑𝐀𝐊𝐒𝐇𝐈 𝐓𝐈𝐖𝐀𝐑𝐈  𝐊𝐈 𝐉𝐀𝐀𝐍 𝐊𝐀𝐁𝐈𝐑 𝐒𝐇𝐀𝐈𝐊𝐇  𝐒𝐄💐✿`,attachment: fs.createReadStream(__dirname + `/noprefix/kabir.mp4`)
       }
       api.sendMessage(msg, threadID, messageID);
     api.setMessageReaction("🤣", event.messageID, (err) => {}, true)
