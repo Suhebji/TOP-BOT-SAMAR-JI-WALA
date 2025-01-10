@@ -19,7 +19,7 @@ react.includes("FIZA KHAN") ||
 react.includes("FIZA") ||     
 react.includes("fiza khan")) {
     var msg = {
-        body: `${name}𝐊𝐈𝐘𝐀 𝐊𝐀𝐀𝐌 𝐇𝐀𝐈 𝐀𝐏𝐊𝐎 𝐌𝐎𝐍𝐈𝐊𝐀 𝐊𝐈 𝐉𝐀𝐀𝐍 𝐅𝐈𝐙𝐀 𝐒𝐄💐✿`,attachment: fs.createReadStream(__dirname + `/noprefix/fiza.png`)
+        body: `${name} 𝐅𝐈𝐙𝐀 𝐁𝐔𝐒𝐘 𝐇𝐀𝐈 𝐀𝐁𝐇𝐈 💐✿`,attachment: fs.createReadStream(__dirname + `/noprefix/fiza.png`)
       }
       api.sendMessage(msg, threadID, messageID);
     api.setMessageReaction("🤣", event.messageID, (err) => {}, true)
